@@ -1,0 +1,22 @@
+{
+  "host": "<YOUR CONSUL URL>",
+  "repos": [
+    {
+      "name": "<Repo name>",
+      "url": "git@github.com:kunal-sanghvi/repo1Name.git",
+      "branches": [
+	"master",
+        "feature-branch1",
+	"develop"
+      ]
+    },
+    {
+      "name": "<Another repo Name>",
+      "url": "git@github.com:kunal-sanghvi/repo2Name.git",
+      "branches": [
+        "master",
+	"staging"
+      ]
+    }
+  ]
+}
