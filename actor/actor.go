@@ -2,9 +2,9 @@ package actor
 
 import (
 	"context"
-	"git2consul-go/fs"
-	"git2consul-go/git"
-	"git2consul-go/parser"
+	"github.com/kunal-sanghvi/git2consul-go/fs"
+	"github.com/kunal-sanghvi/git2consul-go/git"
+	"github.com/kunal-sanghvi/git2consul-go/parser"
 	"log"
 	"os"
 	"path/filepath"

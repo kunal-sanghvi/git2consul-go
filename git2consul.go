@@ -1,7 +1,7 @@
 package main
 
 import (
-	"git2consul-go/actor"
+	"github.com/kunal-sanghvi/git2consul-go/actor"
 	"github.com/urfave/cli"
 	"log"
 	"os"

@@ -2,7 +2,7 @@ package git
 
 import (
 	"context"
-	"git2consul-go/fs"
+	"github.com/kunal-sanghvi/git2consul-go/fs"
 	"golang.org/x/exp/errors/fmt"
 	"gopkg.in/src-d/go-git.v4/config"
 	"gopkg.in/src-d/go-git.v4/plumbing"

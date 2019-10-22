@@ -3,7 +3,7 @@ package parser
 import (
 	"encoding/json"
 	"fmt"
-	"git2consul-go/backend"
+	"github.com/kunal-sanghvi/git2consul-go/backend"
 	"golang.org/x/net/context"
 	"io/ioutil"
 	"log"
