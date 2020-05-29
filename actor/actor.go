@@ -46,7 +46,7 @@ func Git2Consul(configFile, pemFile string) {
 	}
 
 	defer func() {
-		log.Print("Cleaning up root directory")
+		log.Print("Cleaning up temp data")
 		if err = fileSystem.CleanUp(); err != nil {
 			log.Fatalf("Failed to clean up. ERROR: %v", err)
 		}
@@ -56,15 +56,17 @@ func Git2Consul(configFile, pemFile string) {
 	gitController := git.NewGitOps(fileSystem, pemFile)
 
 	for _, repo := range config.Repos {
-		log.Printf("Checking out %s consul repo", repo.Name)
+		log.Printf("Cloning %s consul repo", repo.Name)
 		gitRepo, err := gitController.PlainCloneCtx(ctx, repo.URL, repo.Name)
 		if err != nil {
 			log.Fatalf("Failed to clone %s consul repo. ERROR :%v", repo.Name, err)
 		}
+		log.Println("Fetching latest changes")
 		if err = gitController.Fetch(ctx, gitRepo); err != nil {
 			log.Fatalf("Failed to fetch %s consul repo. ERROR :%v", repo.Name, err)
 		}
 		for _, branch := range repo.Branches {
+			log.Printf("Checking out %s branch", branch)
 			if err = gitController.Checkout(gitRepo, branch); err != nil {
 				log.Fatalf("Failed to checkout %s branch for %s consul repo. ERROR: %v", branch, repo.Name, err)
 			}
