@@ -1,3 +1,4 @@
 .idea/
 git2consul
 config.json
+vendor/

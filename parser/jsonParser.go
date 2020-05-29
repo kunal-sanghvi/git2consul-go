@@ -12,8 +12,8 @@ import (
 
 type jsonParser struct {
 	rootDirectory string
-	configFile string
-	consulHost string
+	configFile    string
+	consulHost    string
 }
 
 var (
@@ -45,6 +45,12 @@ func (jsonConf *jsonParser) ParseConfigFile(ctx context.Context, branch, repo, f
 	if err != nil {
 		return err
 	}
+	fileName := strings.Split(filePath, ".")[0]
+	if err := configBackend.Delete(fmt.Sprintf("%s/%s/%s", repo, branch, fileName)); err != nil {
+		log.Printf("Failed to delete existing conf under %s/%s/%s", repo, branch, fileName)
+	} else {
+		log.Printf("Deleted existing conf under %s/%s/%s", repo, branch, fileName)
+	}
 	jsonConf.ParseConfigMap(ctx, branch, repo, strings.Split(filePath, ".")[0], configMap)
 	return nil
 }
@@ -60,7 +66,7 @@ func (jsonConf *jsonParser) ParseConfigMap(ctx context.Context, branch, repo, fi
 			}
 			//log.Printf("%s %s", consulKey, consulValue)
 		default:
-			jsonConf.ParseConfigMap(ctx, branch, repo,filePath + "/" + key, determineType(branch, filePath + key, value))
+			jsonConf.ParseConfigMap(ctx, branch, repo, filePath+"/"+key, determineType(branch, filePath+key, value))
 		}
 	}
 }
@@ -82,6 +88,6 @@ func determineType(branch, key string, i interface{}) map[string]interface{} {
 func NewJSONParser(rootDirectory, file string) Parser {
 	return &jsonParser{
 		rootDirectory: rootDirectory,
-		configFile: file,
+		configFile:    file,
 	}
 }
